@@ -1,7 +1,6 @@
 "use client";
 import { ContactType, useContacts } from "@/store/useContacts";
 import { useEffect, useState } from "react";
-import PanelList from "@/components/contacts/panelList";
 import {
   Card,
   CardDescription,
@@ -11,7 +10,7 @@ import {
 import Detail from "@/components/contacts/Detail";
 import { menulist } from "@/contants";
 import ContactList from "@/components/contacts/ContactList";
-import Image from "next/image";
+import PanelList from "@/components/contacts/PanelList";
 
 export default function Home() {
   //get function and variables from useContacts

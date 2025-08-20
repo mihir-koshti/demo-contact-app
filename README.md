@@ -1,4 +1,5 @@
 # 📇 Contacts Manager App
+
 ![Dashboard](public/Screenshot.png)
 
 A modern **Contacts Manager** built with **Next.js (App Router)**, **TypeScript**, **Tailwind CSS v3**, **shadcn/ui**, **Zustand**, and **SweetAlert2**.  
@@ -36,30 +37,50 @@ Manage contacts, filter by tabs, and confirm destructive actions with a polished
 
 ## 📂 Project Structure
 
-```
-src/
- ├─ app/
- │   ├─ page.tsx                 # Home route
- │   ├─ contact/
- │   │   └─ page.tsx             # Contacts page
- │   └─ api/
- │       └─ contacts/
- │           └─ route.ts         # (optional) API route returning contacts JSON
- ├─ components/
- │   └─ contacts/
- │       └─ ContactList.tsx      # Reusable list component
- ├─ constants/
- │   └─ menulist.ts              # Tab/menu config with filter functions
- ├─ store/
- │   └─ contactsStore.ts         # Zustand store (add/delete/update, auto ID)
- ├─ data/
- │   └─ contacts.json            # Static JSON (300+ records supported)
- ├─ utils/
- │   └─ confirmDelete.ts         # SweetAlert2 delete confirmation helper
- ├─ types/
- │   └─ contact.ts               # Shared TypeScript types
- └─ app/globals.css              # Tailwind base + shadcn variables
-```
+````
+src
+├── app
+│   ├── global.css
+│   ├── layout.tsx
+│   ├── page.tsx
+│   └── contact
+│     └── page.tsx
+│
+├── components
+│     ├── contacts
+│     │     ├── AddForm.tsx
+│     │     ├── CommonForm.tsx
+│     │     ├── ContactList.tsx
+│     │     ├── Detail.tsx
+│     │     ├── DetailCard.tsx
+│     │     ├── EditForm.tsx
+│     │     └── PanelList.tsx
+│     │
+│     └── ui
+│         ├── avatar.tsx
+│         ├── button.tsx
+│         ├── card.tsx
+│         ├── dialog.tsx
+│         ├── input.tsx
+│         ├── label.tsx
+│         ├── select.tsx
+│         ├── separator.tsx
+│         ├── skeleton.tsx
+│         ├── sonner.tsx
+│         ├── textarea.tsx
+│         └── tooltip.tsx
+│
+├── contants
+│     └── index.js
+│
+├── data
+│     └── dummy_contacts_with_ids.json
+│
+├── store
+│     └── useContacts.ts
+│
+└── utils
+      └── index.ts
 
 ---
 
@@ -70,7 +91,7 @@ src/
 npm install
 npm run dev
 # http://localhost:3000
-```
+````
 
 ### 2) Tailwind v3 + shadcn/ui
 
@@ -79,6 +100,7 @@ npm run dev
   - `@tailwind base; @tailwind components; @tailwind utilities;`
   - `:root { --background: ...; --foreground: ...; --border: ...; }` etc.
 - Install animation plugin:
+
 ```bash
 npm i tailwindcss-animate
 ```
@@ -103,7 +125,6 @@ Add your contacts to `src/data/contacts.json`:
 
 ---
 
-
 ## 🧭 Tabs via Config (constants)
 
 ```ts
@@ -121,13 +142,29 @@ export const menulist: {
   menuid: number;
   filter: (c: Contact) => boolean;
 }[] = [
-  { icon: <HiWallet className="text-2xl" />, menuName: "All", menuid: 1, filter: () => true },
-  { icon: <FiSend className="text-2xl" />, menuName: "Frequent", menuid: 2, filter: (c) => !!c.frequent },
-  { icon: <TbTagStarred className="text-2xl" />, menuName: "Starred", menuid: 3, filter: (c) => !!c.starred }
+  {
+    icon: <HiWallet className="text-2xl" />,
+    menuName: "All",
+    menuid: 1,
+    filter: () => true,
+  },
+  {
+    icon: <FiSend className="text-2xl" />,
+    menuName: "Frequent",
+    menuid: 2,
+    filter: (c) => !!c.frequent,
+  },
+  {
+    icon: <TbTagStarred className="text-2xl" />,
+    menuName: "Starred",
+    menuid: 3,
+    filter: (c) => !!c.starred,
+  },
 ];
 ```
 
 Usage:
+
 ```ts
 const active = menulist.find((m) => m.menuName === selectedMenu);
 const list = contacts.filter(active?.filter ?? (() => true));
@@ -152,7 +189,7 @@ export const confirmDelete = (
     icon: "warning",
     showCancelButton: true,
     confirmButtonText: "Yes, delete it",
-    cancelButtonText: "Cancel"
+    cancelButtonText: "Cancel",
   }).then((res) => {
     if (res.isConfirmed) onConfirm(id);
   });
@@ -160,6 +197,7 @@ export const confirmDelete = (
 ```
 
 Component usage:
+
 ```tsx
 <div onClick={() => confirmDelete(contact.id, onDelete)}>
   <RiDeleteBin6Line />

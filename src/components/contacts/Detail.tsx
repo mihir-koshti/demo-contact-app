@@ -20,7 +20,7 @@ import { toast } from "sonner";
 
 const Detail = () => {
   const [detail, setDetail] = useState<ContactType>(initialValue);
-  
+
   //get function and variables from useContacts
   const {
     selectedContact,
@@ -32,7 +32,6 @@ const Detail = () => {
     setContacts,
   } = useContacts();
 
-
   useEffect(() => {
     const data = contacts.find((c) => c.id === selectedContact);
     if (selectedContact && data) {
@@ -40,7 +39,6 @@ const Detail = () => {
     }
   }, [selectedContact, contacts]);
 
-  
   // onDelete function for deleting specific contact record
   const onDelete = (id: number) => {
     deleteContact(id);
@@ -94,7 +92,9 @@ const Detail = () => {
             <Tooltip>
               <TooltipTrigger>
                 <div
-                  onClick={() => confirmDelete(detail.id, onDelete)}
+                  onClick={() =>
+                    detail.id && confirmDelete(detail.id, onDelete)
+                  }
                   className="hover:bg-blue-300/15 rounded-md p-3 cursor-pointer"
                 >
                   <RiDeleteBin6Line className="text-gray-400 text-xl" />

@@ -8,7 +8,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Input } from "../ui/input";
 import { confirmDelete } from "@/utils";
 import { toast } from "sonner";
-import { Skeleton } from "../ui/skeleton";
 
 // Props type
 interface ContactListProps {
@@ -91,7 +90,11 @@ const ContactList: React.FC<ContactListProps> = ({ filterContacts = [] }) => {
                       <FaRegStar />
                     )}
                   </div>
-                  <div onClick={() => confirmDelete(contact?.id, onDelete)}>
+                  <div
+                    onClick={() =>
+                      contact?.id && confirmDelete(contact?.id, onDelete)
+                    }
+                  >
                     <RiDeleteBin6Line />
                   </div>
                 </div>

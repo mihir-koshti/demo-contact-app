@@ -84,7 +84,7 @@ const DetailCard: React.FC<DetailCardProps> = ({ detail, onDelete }) => {
             <Button
               variant={"destructive"}
               className="px-6 py-5 text-lg"
-              onClick={() => confirmDelete(detail?.id, onDelete)}
+              onClick={() => detail?.id && confirmDelete(detail?.id, onDelete)}
             >
               Delete
             </Button>

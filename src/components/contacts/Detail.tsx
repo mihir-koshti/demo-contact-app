@@ -59,50 +59,52 @@ const Detail = () => {
       <TooltipProvider>
         <div className="p-4 border-b flex items-center justify-between">
           <h1 className="text-xl font-semibold">Contact Details</h1>
-          <div className="flex space-x-3">
-            <Tooltip>
-              <TooltipTrigger>
-                <div
-                  className="hover:bg-blue-300/15 rounded-md p-3 cursor-pointer"
-                  onClick={() => onStarredChange(detail.id || 0)}
-                >
-                  {!detail.starred ? (
-                    <FaRegStar className="text-gray-400 text-xl" />
-                  ) : (
-                    <FaStar className="text-yellow-400 text-xl" />
-                  )}
-                </div>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Important</p>
-              </TooltipContent>
-            </Tooltip>
+          {detail?.id && (
+            <div className="flex space-x-3">
+              <Tooltip>
+                <TooltipTrigger>
+                  <div
+                    className="hover:bg-blue-300/15 rounded-md p-3 cursor-pointer"
+                    onClick={() => onStarredChange(detail.id || 0)}
+                  >
+                    {!detail.starred ? (
+                      <FaRegStar className="text-gray-400 text-xl" />
+                    ) : (
+                      <FaStar className="text-yellow-400 text-xl" />
+                    )}
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Important</p>
+                </TooltipContent>
+              </Tooltip>
 
-            <Tooltip>
-              <TooltipTrigger>
-                <div
-                  className="hover:bg-blue-300/15 rounded-md p-3 cursor-pointer"
-                  onClick={() => setEdit(true)}
-                >
-                  <FiEdit className="text-gray-400 text-xl" />
-                </div>
-              </TooltipTrigger>
-              <TooltipContent>Edit</TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger>
-                <div
-                  onClick={() =>
-                    detail.id && confirmDelete(detail.id, onDelete)
-                  }
-                  className="hover:bg-blue-300/15 rounded-md p-3 cursor-pointer"
-                >
-                  <RiDeleteBin6Line className="text-gray-400 text-xl" />
-                </div>
-              </TooltipTrigger>
-              <TooltipContent>Delete</TooltipContent>
-            </Tooltip>
-          </div>
+              <Tooltip>
+                <TooltipTrigger>
+                  <div
+                    className="hover:bg-blue-300/15 rounded-md p-3 cursor-pointer"
+                    onClick={() => setEdit(true)}
+                  >
+                    <FiEdit className="text-gray-400 text-xl" />
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>Edit</TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger>
+                  <div
+                    onClick={() =>
+                      detail.id && confirmDelete(detail.id, onDelete)
+                    }
+                    className="hover:bg-blue-300/15 rounded-md p-3 cursor-pointer"
+                  >
+                    <RiDeleteBin6Line className="text-gray-400 text-xl" />
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>Delete</TooltipContent>
+              </Tooltip>
+            </div>
+          )}
         </div>
       </TooltipProvider>
       {selectedContact !== 0 && !edit && (

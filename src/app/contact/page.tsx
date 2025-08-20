@@ -11,6 +11,7 @@ import {
 import Detail from "@/components/contacts/Detail";
 import { menulist } from "@/contants";
 import ContactList from "@/components/contacts/ContactList";
+import Image from "next/image";
 
 export default function Home() {
   //get function and variables from useContacts
@@ -30,7 +31,7 @@ export default function Home() {
     setFilterContacts(data as ContactType[]);
   }, [searchQuery]);
 
-  // useEffect for filtering contacts data on based on selection of tab or menu 
+  // useEffect for filtering contacts data on based on selection of tab or menu
   useEffect(() => {
     const menu = menulist.find((m) => m.menuName === selectedMenu);
 
@@ -39,14 +40,16 @@ export default function Home() {
     setSearch("");
   }, [contacts, selectedMenu]);
 
-
   return (
     <div className="m-12 space-y-10">
-      <Card className="border h-36 flex bg-blue-100 items-center ">
+      <Card className="border h-36 grid bg-blue-100 items-center ">
         <CardHeader>
           <CardTitle className="text-xl">Contact App</CardTitle>
           <CardDescription>Home </CardDescription>
         </CardHeader>
+        {/* <div className="flex justify-end w-full h-full">
+          <Image src={"/ChatBc.png"} alt="Chat Image" width={80} height={66} />
+        </div> */}
       </Card>
       <div className="grid grid-cols-7">
         <PanelList />
